@@ -1,5 +1,6 @@
 import { MaterialIcon } from "@/components/shared/material-icon";
 import { MetricChip } from "@/components/shared/metric-chip";
+import { ResponsiveImage } from "@/components/shared/responsive-image";
 import { CHENNAI_CIVIC_IMAGE_URL } from "@/lib/constants/images";
 import type { CrowdReport } from "@/lib/schemas";
 
@@ -17,10 +18,10 @@ export function MapPreviewPlaceholder({
   return (
     <section className="overflow-hidden rounded-lg border bg-card shadow-sm">
       <div className="relative h-56">
-        <img
-          src={CHENNAI_CIVIC_IMAGE_URL}
+        <ResponsiveImage
           alt="A Chennai road used as a static civic map placeholder"
-          className="h-full w-full object-cover"
+          className="h-full w-full"
+          src={CHENNAI_CIVIC_IMAGE_URL}
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.55))]" />
         <div className="absolute left-[18%] top-[34%] flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-soft">

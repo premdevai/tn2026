@@ -1,6 +1,6 @@
 # Vote Smart TN
 
-Vote Smart TN is a mobile-first, static-first Next.js frontend for a Tamil Nadu voter-helper utility. The app currently runs on typed empty repository placeholders. There is no backend, authentication, websocket, chat, AI, seeded civic data, or real map integration yet.
+Vote Smart TN is a mobile-first, static-first Next.js frontend for a Tamil Nadu voter-helper utility. The app currently runs on typed static repositories with demo civic records for UI validation. There is no backend, authentication, websocket, chat, AI, or real map integration yet.
 
 ## Stack
 
@@ -9,7 +9,7 @@ Vote Smart TN is a mobile-first, static-first Next.js frontend for a Tamil Nadu 
 - shadcn/ui-style primitives for reusable UI foundations
 - Zod schemas for every core entity
 - Zustand for small client-only state
-- Static-first repository and service abstractions over empty typed datasets
+- Static-first repository and service abstractions over typed demo datasets
 - Plus Jakarta Sans for editorial UI, Inter for data/caption surfaces, and Material Symbols Outlined icons
 
 ## Creative Direction
@@ -31,9 +31,13 @@ src/components/shared   Cross-feature UI such as cards, chips, search, map place
 src/features/booths     Booth UI, repositories, services
 src/features/checklist  Checklist UI, repositories, services
 src/features/candidates Candidate UI, repositories, services
+src/features/comparison Manifesto comparison UI, repositories, services
+src/features/districts  District and constituency UI, repositories, services
+src/features/guide      First-time voter guide UI, repositories, services
+src/features/stations   Polling station UI, repositories, services
 src/features/about      About page feature content
 src/lib/constants       App constants, navigation, imagery
-src/lib/data            Validated empty datasets for initial wiring
+src/lib/data            Shared placeholder datasets for initial wiring
 src/lib/repositories    Repository composition
 src/lib/services        Service composition
 src/lib/schemas         Zod schemas and inferred entity types
@@ -52,16 +56,21 @@ All entity shapes are validated with Zod:
 - booth
 - candidate
 - crowd report
+- district and constituency
+- guide content
+- manifesto comparison
 - recommendation
 - checklist item
+- station
 
-Repository methods return promises even though the current datasets are empty and local. This keeps the UI ready for TanStack Query and async API adapters later.
+Repository methods return promises even though the current datasets are local. This keeps the UI ready for TanStack Query and async API adapters later.
 
 Zustand is intentionally limited to client-only interaction state:
 
 - checklist completion
 - candidate filters
 - quick report draft selection
+- selected station persistence
 
 ## Future Cloudflare Backend Path
 
@@ -87,12 +96,18 @@ npm run build
 ## Current Routes
 
 - `/`
+- `/districts`
+- `/districts/[slug]`
+- `/districts/[slug]/constituencies/[constituencySlug]`
 - `/booth/[slug]`
 - `/checklist`
 - `/candidates`
+- `/comparison`
+- `/guide`
+- `/stations`
 - `/about`
 - `/map`
 
 ## Notes
 
-No candidate or civic seed records are included yet. Connect official sources before public release.
+Demo records are for interface validation only. Connect official sources before public release.

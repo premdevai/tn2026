@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { BookOpen, ArrowRight } from "lucide-react";
+import { ResponsiveImage } from "@/components/shared/responsive-image";
 
 export function NewToVotingGuide() {
   return (
@@ -12,18 +14,24 @@ export function NewToVotingGuide() {
             Making your voice heard is a privilege. We&apos;ve simplified the entire process from entering the booth to the indelible ink mark.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-secondary text-on-secondary px-8 py-4 rounded-xl font-bold flex items-center transition-transform active:scale-95">
+            <Link
+              className="bg-secondary text-on-secondary px-8 py-4 rounded-xl font-bold flex items-center transition-transform active:scale-95"
+              href="/guide"
+            >
               Start the Guide <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
-            <button className="bg-surface-container-lowest bg-opacity-10 text-on-primary px-8 py-4 rounded-xl font-bold border border-white border-opacity-10 transition-all hover:bg-opacity-20">
+            </Link>
+            <button
+              className="bg-surface-container-lowest bg-opacity-10 text-on-primary px-8 py-4 rounded-xl font-bold border border-white border-opacity-10 transition-all hover:bg-opacity-20"
+              type="button"
+            >
                Download PDF
             </button>
           </div>
         </div>
         <div className="w-full md:w-1/2 h-[400px] md:h-full min-h-[400px] relative">
-          <img 
+          <ResponsiveImage
             alt="Democratic participation" 
-            className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 mix-blend-overlay" 
+            className="absolute inset-0 h-full w-full grayscale opacity-60 mix-blend-overlay" 
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPm2ezR_AmhyO-E3aI6Lr4UC46i6JoYcVAcA2ue95odg8RyO5bWGi3DB3GCvftYajsHJ5QgtEjVYKD-Jzb_uiYk7J7Mzd0m2vhJauX7i_hfeTbfK8x3lwPsirawWh9ee507tE9G4AJ9K6ySN6tgRsADZjWOqx94Om6mzplzhIoJnRdrCRgFbdUuzlAH9Th6hX9t12Vrp3t6fUsBEzmuqM8F5fUfGYf6LefowJjDGFW501oF_g0pPZSlA2mFuhheAhsbZGPpnnjh1cw" 
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-transparent to-transparent"></div>
@@ -44,10 +52,13 @@ export function NewToVotingGuide() {
               </p>
             </div>
           </div>
-          <button className="bg-white hover:bg-white/90 text-[#2c1600] px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all w-full sm:w-max">
+          <Link
+            className="bg-white hover:bg-white/90 text-[#2c1600] px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all w-full sm:w-max"
+            href="/guide"
+          >
             Read the Full Guide
             <ArrowRight className="w-5 h-5" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

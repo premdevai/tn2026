@@ -1,6 +1,6 @@
 import { emptyCandidates } from "@/lib/data/empty-datasets";
 import type { Candidate } from "@/lib/schemas";
-import type { CandidateListParams, CandidateRepository } from "./candidate-repository";
+import type { CandidateRepository } from "./candidate-repository";
 
 export function createStaticCandidateRepository(): CandidateRepository {
   return {

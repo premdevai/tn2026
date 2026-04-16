@@ -1,6 +1,6 @@
 import { emptyBooths } from "@/lib/data/empty-datasets";
 import type { Booth } from "@/lib/schemas";
-import type { BoothListParams, BoothRepository } from "./booth-repository";
+import type { BoothRepository } from "./booth-repository";
 
 export function createStaticBoothRepository(): BoothRepository {
   return {

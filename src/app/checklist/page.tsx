@@ -1,26 +1,48 @@
 import type { Metadata } from "next";
-import { ChecklistBoard } from "@/features/checklist/components/checklist-board";
+
+import { Breadcrumbs, MetricGrid, PageHeader, PageSection } from "@/components/shared";
+import { ChecklistBoard } from "@/features/checklist/components";
 import { appServices } from "@/lib/services/app-services";
 
 export const metadata: Metadata = {
-  title: "Voting checklist",
-  description:
-    "A mobile checklist for preparing documents, route plans, and voting day essentials in Tamil Nadu."
+  title: "Checklist Dashboard",
+  description: "Checklist and live tracking for constituency voting."
 };
 
 export default async function ChecklistPage() {
   const items = await appServices.checklist.listItems();
 
   return (
-    <div className="space-y-5">
-      <section className="space-y-2">
-        <p className="text-sm font-semibold text-primary">Before you leave</p>
-        <h1 className="text-3xl font-bold leading-tight">Voting checklist</h1>
-        <p className="text-sm leading-6 text-muted-foreground">
-          Keep the small things ready so voting day stays calm once checklist content is connected.
-        </p>
-      </section>
-      <ChecklistBoard items={items} />
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-8 md:px-8 md:py-12">
+      <PageHeader
+        breadcrumbs={
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Tamil Nadu" },
+              { label: "Checklist" }
+            ]}
+          />
+        }
+        eyebrow="Current Voting Context"
+        title="My Constituency Dashboard"
+        description="Track essentials, booth readiness, queue updates, and voter-day preparation from one service-backed surface."
+      />
+
+      <MetricGrid
+        items={[
+          { icon: "location_on", label: "Constituency", value: "Mylapore" },
+          { icon: "how_to_vote", label: "Assigned booth", value: "Pending" },
+          { icon: "timer", label: "Wait", value: "API-ready" },
+          { icon: "verified_user", label: "Source", value: "Static" }
+        ]}
+      />
+
+      <PageSection
+        title="Voter checklist"
+        description="This board is wired through the checklist repository and can be filled from official guidance or a CMS without changing the route."
+      >
+        <ChecklistBoard items={items} />
+      </PageSection>
     </div>
   );
 }
