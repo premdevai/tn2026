@@ -24,15 +24,20 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^22.19.17",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.5.0",
+    "axios": "^1.15.0",
+    "cheerio": "^1.2.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^15.5.15",
+    "playwright": "^1.59.1",
     "postcss": "^8.5.9",
     "tailwindcss": "^3.4.19",
     "tailwindcss-animate": "^1.0.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }
