@@ -1,6 +1,6 @@
 "use client";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { Button } from "@/components/shared/ui/button";
 import { crowdReportTypeSchema, type CrowdReportType } from "@/lib/schemas";
 import { cn } from "@/lib/utils/cn";
@@ -42,7 +42,7 @@ export function QuickReportChipGroup({ boothSlug }: QuickReportChipGroupProps) {
               className={cn("h-10 shrink-0 gap-2 px-3", isSelected && "border-primary")}
               onClick={() => setDraft(crowdReportTypeSchema.parse(option.value), boothSlug)}
             >
-              <MaterialIcon name={option.icon} className="text-[18px]" />
+              <LucideIcon name={option.icon} className="text-[18px]" />
               {option.label}
             </Button>
           );

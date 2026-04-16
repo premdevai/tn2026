@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils";
 
 type MetricChipProps = {
@@ -16,7 +16,7 @@ export function MetricChip({ label, value, icon, className }: MetricChipProps) {
         className,
       )}
     >
-      <MaterialIcon className="text-[1.1rem] text-civic-teal" name={icon} />
+      <LucideIcon className="text-[1.1rem] text-civic-teal" name={icon} />
       {value ? (
         <span className="grid">
           <span className="font-data text-[0.7rem] font-medium leading-4 text-muted-foreground">

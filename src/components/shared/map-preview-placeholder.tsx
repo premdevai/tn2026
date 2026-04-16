@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { MetricChip } from "@/components/shared/metric-chip";
 import { ResponsiveImage } from "@/components/shared/responsive-image";
 import { CHENNAI_CIVIC_IMAGE_URL } from "@/lib/constants/images";
@@ -25,10 +25,10 @@ export function MapPreviewPlaceholder({
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.55))]" />
         <div className="absolute left-[18%] top-[34%] flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-soft">
-          <MaterialIcon name="location_on" />
+          <LucideIcon name="location_on" />
         </div>
         <div className="absolute right-[22%] top-[46%] flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-secondary-foreground shadow-soft">
-          <MaterialIcon name="how_to_vote" />
+          <LucideIcon name="how_to_vote" />
         </div>
         <div className="absolute bottom-4 left-4 right-4 space-y-3 text-white">
           <div>

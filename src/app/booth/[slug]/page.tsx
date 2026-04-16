@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs, PageHeader, PageSection, PageShell } from "@/components/shared";
 import { DisclaimerCard } from "@/components/shared/disclaimer-card";
 import { MapPreviewPlaceholder } from "@/components/shared/map-preview-placeholder";
-import { MaterialIcon } from "@/components/shared/material-icon";
 import { MetricChip } from "@/components/shared/metric-chip";
 import { QuickReportChipGroup } from "@/components/shared/quick-report-chip-group";
 import { StatusPill } from "@/components/shared/status-pill";
-import { Button } from "@/components/shared/ui/button";
 import { RecommendationCard } from "@/features/booths/components/recommendation-card";
 import { appServices } from "@/lib/services/app-services";
 
@@ -60,35 +58,33 @@ export default async function BoothPage({ params }: BoothPageProps) {
   const crowd = crowdMeta[booth.crowdLevel];
 
   return (
-    <div className="space-y-6">
-      <section className="space-y-4">
-        <Button asChild variant="ghost" className="h-9 px-0 text-muted-foreground">
-          <Link href="/">
-            <MaterialIcon name="arrow_back" />
-            Home
-          </Link>
-        </Button>
-        <div className="space-y-3">
+    <PageShell size="narrow">
+      <PageHeader
+        breadcrumbs={
+          <Breadcrumbs
+            backHref="/"
+            backLabel="Home"
+            items={[{ href: "/", label: "Tamil Nadu" }, { label: booth.name }]}
+            variant="back"
+          />
+        }
+        title={booth.name}
+        description={`${booth.address}, ${booth.locality}`}
+        actions={
           <StatusPill tone={crowd.tone} icon={crowd.icon}>
             {crowd.label}
           </StatusPill>
-          <div>
-            <h1 className="text-3xl font-bold leading-tight">{booth.name}</h1>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              {booth.address}, {booth.locality}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <MetricChip icon="timer" label="Wait" value={`${booth.queueMinutes} min`} />
-            <MetricChip icon="location_city" label="Ward" value={booth.ward} />
-            <MetricChip icon="groups" label="Assembly" value={booth.assemblyConstituency} />
-            <MetricChip icon="update" label="Source" value="Pending" />
-          </div>
-        </div>
-      </section>
+        }
+      />
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold">Facilities</h2>
+      <div className="grid grid-cols-2 gap-2">
+        <MetricChip icon="timer" label="Wait" value={`${booth.queueMinutes} min`} />
+        <MetricChip icon="location_city" label="Ward" value={booth.ward} />
+        <MetricChip icon="groups" label="Assembly" value={booth.assemblyConstituency} />
+        <MetricChip icon="update" label="Source" value="Pending" />
+      </div>
+
+      <PageSection title="Facilities">
         <div className="grid grid-cols-2 gap-2">
           <MetricChip
             icon="accessible"
@@ -111,24 +107,22 @@ export default async function BoothPage({ params }: BoothPageProps) {
             value={booth.facilities.shadedQueue ? "Queue shade" : "Limited"}
           />
         </div>
-      </section>
+      </PageSection>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold">Booth notes</h2>
+      <PageSection title="Booth notes">
         <div className="space-y-3">
           {recommendations.map((recommendation) => (
             <RecommendationCard key={recommendation.id} recommendation={recommendation} />
           ))}
         </div>
-      </section>
+      </PageSection>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold">Report queue condition</h2>
+      <PageSection title="Report queue condition">
         <QuickReportChipGroup boothSlug={booth.slug} />
-      </section>
+      </PageSection>
 
       <MapPreviewPlaceholder reports={reports} title="Booth area preview" />
       <DisclaimerCard />
-    </div>
+    </PageShell>
   );
 }

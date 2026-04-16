@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils";
 
 export type StatusTone = "good" | "warning" | "danger" | "neutral";
@@ -39,7 +39,7 @@ export function StatusPill({
       )}
     >
       <span className={cn("h-1.5 w-1.5 rounded-full", resolvedTone === "good" ? "animate-pulse bg-civic-teal" : resolvedTone === "warning" ? "bg-civic-gold" : resolvedTone === "danger" ? "bg-civic-crimson" : "bg-muted-foreground")} />
-      {icon ? <MaterialIcon className="text-[1rem]" name={icon} /> : null}
+      {icon ? <LucideIcon className="text-[1rem]" name={icon} /> : null}
       {content}
     </span>
   );

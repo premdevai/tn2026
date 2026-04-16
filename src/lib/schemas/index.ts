@@ -3,6 +3,8 @@ export * from "./candidate";
 export * from "./checklist-item";
 export * from "./comparison";
 export * from "./crowd-report";
+export * from "./content";
+export * from "./data-source";
 export * from "./district";
 export * from "./guide";
 export * from "./recommendation";

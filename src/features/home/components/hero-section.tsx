@@ -16,7 +16,7 @@ export function HeroSection() {
             <p className="text-xl text-on-surface-variant mb-12 leading-relaxed">
               Real-time crowd intelligence and station data for Tamil Nadu. Skip the queue, fulfill your civic duty with ease.
             </p>
-            <div className="w-full max-w-2xl bg-surface-container-lowest p-2 rounded-xl shadow-xl flex items-center space-x-3">
+            <div className="w-full max-w-2xl bg-surface-container-lowest p-2 rounded-lg shadow-xl flex items-center space-x-3">
               <div className="flex-grow flex items-center bg-surface-container-high rounded-lg px-4 py-3">
                 <MapPin className="text-outline mr-3 w-6 h-6" />
                 <input 
@@ -25,7 +25,7 @@ export function HeroSection() {
                   type="text" 
                 />
               </div>
-              <button className="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold transition-transform active:scale-95 hover:bg-primary/90">
+              <button className="bg-primary text-on-primary px-8 py-3 rounded-lg font-bold transition-transform active:scale-95 hover:bg-primary/90">
                 Search Booths
               </button>
             </div>
@@ -47,24 +47,24 @@ export function HeroSection() {
               <Search className="w-5 h-5 text-on-surface-variant/60" />
             </div>
             <input 
-              className="w-full bg-surface-container-high border-none rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 text-sm placeholder:text-on-surface-variant/60 outline-none" 
+              className="w-full bg-surface-container-high border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 text-sm placeholder:text-on-surface-variant/60 outline-none" 
               placeholder="Search candidates or booths..." 
               type="text"
             />
           </div>
         </section>
         
-        <section className="bg-primary rounded-xl p-6 text-on-primary relative overflow-hidden">
+        <section className="bg-primary rounded-lg p-6 text-on-primary relative overflow-hidden">
           <div className="relative z-10 space-y-4">
             <div className="flex items-center gap-2">
-              <span className="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">
+              <span className="bg-secondary-container text-on-secondary-container text-xs font-bold px-2 py-1 rounded-full uppercase tracking-widest">
                 Live Status
               </span>
             </div>
             <h3 className="font-headline text-xl font-bold leading-tight">
               Check your local polling station rush in real-time.
             </h3>
-            <button className="bg-secondary text-on-secondary px-5 py-2.5 rounded-xl text-sm font-semibold flex w-max items-center gap-2 active:scale-95 transition-all">
+            <button className="bg-secondary text-on-secondary px-5 py-2.5 rounded-lg text-sm font-semibold flex w-max items-center gap-2 active:scale-95 transition-all">
               Find My Booth
               <ArrowRight className="w-4 h-4" />
             </button>

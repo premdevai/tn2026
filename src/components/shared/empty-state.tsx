@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils/cn";
 
 type EmptyStateProps = {
@@ -13,7 +13,7 @@ export function EmptyState({ icon = "database", title, body, className }: EmptyS
     <div className={cn("rounded-md border border-dashed border-border bg-card p-4 shadow-soft", className)}>
       <div className="flex items-start gap-3">
         <span className="mt-0.5 flex h-8 w-8 items-center justify-center rounded-md bg-muted text-muted-foreground">
-          <MaterialIcon name={icon} />
+          <LucideIcon name={icon} />
         </span>
         <div className="space-y-1">
           <h3 className="text-sm font-semibold">{title}</h3>

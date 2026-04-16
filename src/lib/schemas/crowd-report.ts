@@ -18,5 +18,11 @@ export const crowdReportSchema = z.object({
   confidence: z.enum(["low", "medium", "high"])
 });
 
+export const crowdReportCreateInputSchema = z.object({
+  boothSlug: z.string().min(1).optional(),
+  type: crowdReportTypeSchema
+});
+
 export type CrowdReportType = z.infer<typeof crowdReportTypeSchema>;
 export type CrowdReport = z.infer<typeof crowdReportSchema>;
+export type CrowdReportCreateInput = z.infer<typeof crowdReportCreateInputSchema>;

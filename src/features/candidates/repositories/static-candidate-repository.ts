@@ -1,6 +1,10 @@
 import { emptyCandidates } from "@/lib/data/empty-datasets";
-import type { Candidate } from "@/lib/schemas";
+import { candidateFiltersSchema, type Candidate } from "@/lib/schemas";
 import type { CandidateRepository } from "./candidate-repository";
+
+const fallbackFilters = candidateFiltersSchema.parse({
+  localities: ["Adyar", "T Nagar", "Velachery", "Anna Nagar"]
+});
 
 export function createStaticCandidateRepository(): CandidateRepository {
   return {
@@ -22,6 +26,11 @@ export function createStaticCandidateRepository(): CandidateRepository {
       }
 
       return candidates;
+    },
+    async listFilters() {
+      const localities = Array.from(new Set(emptyCandidates.map((candidate) => candidate.locality))).sort();
+
+      return localities.length > 0 ? { localities } : fallbackFilters;
     }
   };
 }

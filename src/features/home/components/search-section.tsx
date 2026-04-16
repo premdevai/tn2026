@@ -13,7 +13,7 @@ export function SearchSection() {
           <Search className="h-5 w-5 opacity-60" />
         </div>
         <Input 
-          className="w-full bg-surface-container-high border-none rounded-xl py-6 pl-12 pr-4 focus-visible:ring-2 focus-visible:ring-primary/20 text-sm placeholder:text-on-surface-variant/60" 
+          className="w-full bg-surface-container-high border-none rounded-lg py-6 pl-12 pr-4 focus-visible:ring-2 focus-visible:ring-primary/20 text-sm placeholder:text-on-surface-variant/60" 
           placeholder="Search candidates or booths..." 
           type="text"
         />

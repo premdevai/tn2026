@@ -14,11 +14,17 @@ export function createDistrictService(repository: DistrictRepository) {
     getConstituencyBySlug(districtSlug: string, constituencySlug: string) {
       return repository.findConstituency(districtSlug, constituencySlug);
     },
+    getCandidateBySlug(districtSlug: string, constituencySlug: string, candidateSlug: string) {
+      return repository.findCandidate(districtSlug, constituencySlug, candidateSlug);
+    },
     listDistrictSlugs() {
       return repository.listSlugs();
     },
     listConstituencySlugs() {
       return repository.listConstituencySlugs();
+    },
+    listCandidateSlugs() {
+      return repository.listCandidateSlugs();
     }
   };
 }

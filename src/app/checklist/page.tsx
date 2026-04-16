@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Breadcrumbs, MetricGrid, PageHeader, PageSection } from "@/components/shared";
+import { Breadcrumbs, MetricGrid, PageHeader, PageSection, PageShell } from "@/components/shared";
 import { ChecklistBoard } from "@/features/checklist/components";
 import { appServices } from "@/lib/services/app-services";
 
@@ -13,7 +13,7 @@ export default async function ChecklistPage() {
   const items = await appServices.checklist.listItems();
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 py-8 md:px-8 md:py-12">
+    <PageShell>
       <PageHeader
         breadcrumbs={
           <Breadcrumbs
@@ -43,6 +43,6 @@ export default async function ChecklistPage() {
       >
         <ChecklistBoard items={items} />
       </PageSection>
-    </div>
+    </PageShell>
   );
 }

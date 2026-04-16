@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Breadcrumbs, PageHeader, PageSection, PageShell } from "@/components/shared";
 import { DisclaimerCard } from "@/components/shared/disclaimer-card";
 import { EmptyState } from "@/components/shared/empty-state";
 import { MapPreviewPlaceholder } from "@/components/shared/map-preview-placeholder";
@@ -19,24 +20,21 @@ export default async function MapPage() {
   ]);
 
   return (
-    <div className="space-y-5">
-      <section className="space-y-2">
-        <p className="text-sm font-semibold text-primary">Map preview</p>
-        <h1 className="text-3xl font-bold leading-tight">Booths around Tamil Nadu</h1>
-        <p className="text-sm leading-6 text-muted-foreground">
-          A real map API can plug in later. The current version stays static and low cost.
-        </p>
-      </section>
+    <PageShell>
+      <PageHeader
+        breadcrumbs={<Breadcrumbs items={[{ href: "/", label: "Tamil Nadu" }, { label: "Map" }]} />}
+        eyebrow="Map preview"
+        title="Booths around Tamil Nadu"
+        description="A real map API can plug in later. The current version stays static and low cost."
+      />
 
       <MapPreviewPlaceholder reports={reports} title="Static booth map preview" />
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold">Share a quick update</h2>
+      <PageSection title="Share a quick update">
         <QuickReportChipGroup />
-      </section>
+      </PageSection>
 
-      <section className="space-y-3">
-        <h2 className="text-lg font-bold">Listed booths</h2>
+      <PageSection title="Listed booths">
         {booths.length > 0 ? (
           booths.map((booth) => <BoothCard key={booth.id} booth={booth} />)
         ) : (
@@ -46,9 +44,9 @@ export default async function MapPage() {
             body="The map route is ready for real booth records and geocoded locations."
           />
         )}
-      </section>
+      </PageSection>
 
       <DisclaimerCard />
-    </div>
+    </PageShell>
   );
 }

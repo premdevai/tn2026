@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { Breadcrumbs, PageHeader, PageShell } from "@/components/shared";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { ResponsiveImage } from "@/components/shared/responsive-image";
+import { Button } from "@/components/shared/ui/button";
 import type { ComparisonModel, PartyProfile, PolicySector } from "@/lib/schemas";
 import { cn } from "@/lib/utils/cn";
 
@@ -91,38 +93,31 @@ function SelectionView({
   const canCompare = selectedIds.length >= 2;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-40 pt-8 md:px-8 md:pb-16">
-      <header className="mb-10 md:mb-12">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-3xl">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary-container px-3 py-1 text-xs font-bold uppercase tracking-widest text-on-secondary-container">
-              <FilledIcon className="text-[14px]" name="verified" />
-              Comparative Analytics
-            </span>
-            <h1 className="mb-4 font-headline text-4xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl">
-              Compare Manifestos
-            </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
-              Select two or three parties to compare policy promises, fiscal gaps, feasibility, and
-              editorial verification notes side by side.
-            </p>
-          </div>
-          <button
+    <PageShell className="pb-40 md:pb-16">
+      <PageHeader
+        className="mb-10 md:mb-12"
+        breadcrumbs={<Breadcrumbs items={[{ href: "/", label: "Tamil Nadu" }, { label: "Comparison" }]} />}
+        eyebrow="Comparative Analytics"
+        title="Compare Manifestos"
+        description="Select two or three parties to compare policy promises, fiscal gaps, feasibility, and editorial verification notes side by side."
+        actions={
+          <Button
             className={cn(
-              "hidden items-center gap-3 rounded-lg px-8 py-4 font-bold shadow-lg transition-all active:scale-[0.98] md:flex",
+              "hidden gap-3 font-bold shadow-lg transition-all active:scale-[0.98] md:flex",
               canCompare
                 ? "bg-secondary text-on-secondary shadow-secondary/20 hover:scale-[1.02]"
                 : "cursor-not-allowed bg-surface-container-high text-on-surface-variant shadow-none"
             )}
             disabled={!canCompare}
             onClick={onCompare}
+            size="xl"
             type="button"
           >
-            <MaterialIcon name="compare_arrows" />
+            <LucideIcon name="compare_arrows" />
             Compare Selected ({selectedIds.length})
-          </button>
-        </div>
-      </header>
+          </Button>
+        }
+      />
 
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4 md:hidden">
         <div className="flex rounded-lg bg-surface-container p-1">
@@ -151,7 +146,7 @@ function SelectionView({
         <aside className="hidden space-y-6 md:col-span-3 md:block">
           <div className="rounded-lg bg-surface-container-low p-6">
             <h2 className="mb-4 flex items-center gap-2 font-headline font-bold text-primary">
-              <MaterialIcon className="text-secondary" name="filter_list" />
+              <LucideIcon className="text-secondary" name="filter_list" />
               Parameters
             </h2>
             <div className="space-y-4">
@@ -178,7 +173,7 @@ function SelectionView({
               </p>
               <button className="flex items-center gap-2 text-sm font-bold hover:underline" type="button">
                 View Methodology
-                <MaterialIcon className="text-sm" name="arrow_forward" />
+                <LucideIcon className="text-sm" name="arrow_forward" />
               </button>
             </div>
             <div className="absolute -bottom-4 -right-4 opacity-10">
@@ -200,7 +195,7 @@ function SelectionView({
             className="flex min-h-72 flex-col items-center justify-center rounded-lg border-2 border-dashed border-outline-variant p-6 text-center text-on-surface-variant transition-colors hover:border-secondary hover:text-secondary"
             type="button"
           >
-            <MaterialIcon className="mb-3 text-4xl transition-transform" name="search" />
+            <LucideIcon className="mb-3 text-4xl transition-transform" name="search" />
             <span className="font-bold">Search Other Parties</span>
             <span className="mt-1 text-xs opacity-70">Explore independent or regional factions</span>
           </button>
@@ -242,7 +237,7 @@ function SelectionView({
         onCompare={onCompare}
         selectedParties={selectedParties}
       />
-    </div>
+    </PageShell>
   );
 }
 
@@ -273,7 +268,7 @@ function PartyCard({
         onClick={onToggle}
         type="button"
       >
-        {isSelected ? <MaterialIcon className="text-xs" name="check" /> : null}
+        {isSelected ? <LucideIcon className="text-xs" name="check" /> : null}
       </button>
       <div className="mb-6 flex items-center gap-4 md:block">
         <div className="mb-0 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-surface-container-high md:mb-6">
@@ -322,7 +317,7 @@ function PartyCard({
         onClick={onToggle}
         type="button"
       >
-        {!isSelected ? <MaterialIcon className="text-sm" name="add" /> : null}
+        {!isSelected ? <LucideIcon className="text-sm" name="add" /> : null}
         {isSelected ? "Remove from Comparison" : "Add to Compare"}
       </button>
     </article>
@@ -347,31 +342,30 @@ function ComparisonView({
   selectedParties: Party[];
 }) {
   return (
-    <div className="mx-auto max-w-7xl px-4 pb-16 pt-8 md:px-8">
-      <header className="mb-10 md:mb-16">
-        <button
-          className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-secondary hover:underline"
-          onClick={onBack}
-          type="button"
-        >
-          <MaterialIcon className="text-lg" name="arrow_back" />
-          Change parties
-        </button>
-        <div className="mb-4 flex flex-wrap items-center gap-3">
-          <span className="rounded-full bg-secondary-container px-3 py-1 text-xs font-bold uppercase tracking-widest text-on-secondary-container">
-            Verified Analysis
-          </span>
-          <span className="text-sm font-medium text-on-surface-variant">Updated: May 2024</span>
-        </div>
-        <h1 className="mb-4 font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
-          Manifesto Comparison
-        </h1>
-        <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
-          Side-by-side verification of key policy promises across the selected political blocs.
-        </p>
-      </header>
+    <PageShell className="pb-16">
+      <PageHeader
+        className="mb-10 md:mb-16"
+        breadcrumbs={
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Tamil Nadu" },
+              { href: "/comparison", label: "Comparison" },
+              { label: "Manifestos" }
+            ]}
+          />
+        }
+        eyebrow="Verified Analysis"
+        title="Manifesto Comparison"
+        description="Side-by-side verification of key policy promises across the selected political blocs."
+        actions={
+          <Button className="gap-2" onClick={onBack} type="button" variant="link">
+            <LucideIcon className="text-lg" name="arrow_back" />
+            Change parties
+          </Button>
+        }
+      />
 
-      <div className="sticky top-16 z-40 -mx-4 bg-surface/95 px-4 py-4 backdrop-blur-sm md:hidden">
+      <div className="sticky top-16 z-40 -mx-6 bg-surface/95 px-6 py-4 backdrop-blur-sm md:hidden">
         <div className="no-scrollbar flex gap-3 overflow-x-auto pb-1">
           {sectors.map((sector) => (
             <button
@@ -391,7 +385,7 @@ function ComparisonView({
         </div>
       </div>
 
-      <div className="sticky top-[132px] z-30 -mx-4 bg-surface-container-low px-4 py-3 shadow-sm md:hidden">
+      <div className="sticky top-[132px] z-30 -mx-6 bg-surface-container-low px-6 py-3 shadow-sm md:hidden">
         <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${selectedParties.length}, minmax(0, 1fr))` }}>
           {selectedParties.map((party) => (
             <div className="flex min-w-0 items-center gap-3" key={party.id}>
@@ -404,7 +398,7 @@ function ComparisonView({
                 />
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+                <div className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                   {party.shortName}
                 </div>
                 <div className="truncate text-sm font-bold text-primary">{party.focus}</div>
@@ -444,7 +438,7 @@ function ComparisonView({
             </div>
           </div>
           <div className="absolute -bottom-8 -right-6 opacity-10">
-            <MaterialIcon className="text-[140px]" name="monitoring" />
+            <LucideIcon className="text-[140px]" name="monitoring" />
           </div>
         </div>
         <InsightCard
@@ -469,7 +463,7 @@ function ComparisonView({
         </p>
         <div className="flex flex-wrap gap-4">
           <button className="flex items-center gap-2 rounded-lg bg-secondary px-8 py-4 font-bold text-on-secondary transition-all active:scale-95" type="button">
-            <MaterialIcon name="download" />
+            <LucideIcon name="download" />
             Download PDF Report
           </button>
           <button className="rounded-lg bg-surface-container-lowest px-8 py-4 font-bold text-primary transition-colors hover:bg-white" type="button">
@@ -477,7 +471,7 @@ function ComparisonView({
           </button>
         </div>
       </section>
-    </div>
+    </PageShell>
   );
 }
 
@@ -525,7 +519,7 @@ function DesktopComparisonGrid({
               index % 2 === 0 ? "bg-surface-container-high/20" : "bg-surface-container-low"
             )}
           >
-            <MaterialIcon className="mb-3 text-secondary" name={sector.icon} />
+            <LucideIcon className="mb-3 text-secondary" name={sector.icon} />
             <h3 className="font-headline text-lg font-bold text-primary">{sector.title}</h3>
             <p className="mt-2 text-sm text-on-surface-variant">{sector.context}</p>
           </div>
@@ -536,10 +530,10 @@ function DesktopComparisonGrid({
             >
               <p>{policyCopy[party.id][sector.id]}</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <span className="rounded bg-secondary-container px-2 py-1 text-[10px] font-bold uppercase text-on-secondary-container">
+                <span className="rounded bg-secondary-container px-2 py-1 text-xs font-bold uppercase text-on-secondary-container">
                   {party.focus}
                 </span>
-                <span className="rounded bg-surface-container px-2 py-1 text-[10px] font-bold uppercase text-primary">
+                <span className="rounded bg-surface-container px-2 py-1 text-xs font-bold uppercase text-primary">
                   {party.score}% traced
                 </span>
               </div>
@@ -563,7 +557,7 @@ function MobileComparison({
   return (
     <section className="mt-8 space-y-6 md:hidden">
       <div className="flex items-center gap-2">
-        <MaterialIcon className="text-primary" name={activeSector.icon} />
+        <LucideIcon className="text-primary" name={activeSector.icon} />
         <h2 className="font-headline text-xl font-bold text-primary">{activeSector.title}</h2>
       </div>
       <p className="text-sm leading-relaxed text-on-surface-variant">{activeSector.context}</p>
@@ -583,10 +577,10 @@ function MobileComparison({
               {policyCopy[party.id][activeSector.id]}
             </p>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded bg-surface-container px-2 py-1 text-[10px] font-bold uppercase">
+              <span className="rounded bg-surface-container px-2 py-1 text-xs font-bold uppercase">
                 {party.focus}
               </span>
-              <span className="rounded bg-secondary-container px-2 py-1 text-[10px] font-bold uppercase text-on-secondary-container">
+              <span className="rounded bg-secondary-container px-2 py-1 text-xs font-bold uppercase text-on-secondary-container">
                 {party.score}% traced
               </span>
             </div>
@@ -608,7 +602,7 @@ function MobileCompareBar({
 }) {
   return (
     <div className="fixed bottom-24 left-0 z-40 w-full px-4 md:hidden">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 rounded-2xl border border-white/10 bg-primary p-4 text-white shadow-2xl">
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 rounded-lg border border-white/10 bg-primary p-4 text-white shadow-2xl">
         <div className="flex min-w-0 items-center gap-4">
           <div className="flex -space-x-3">
             {selectedParties.slice(0, 3).map((party) => (
@@ -627,7 +621,7 @@ function MobileCompareBar({
           </div>
           <div className="min-w-0">
             <p className="font-headline text-sm font-bold">{selectedParties.length} Parties Selected</p>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-primary-fixed-dim">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary-fixed-dim">
               {canCompare ? "Ready to compare" : "Select one more"}
             </p>
           </div>
@@ -642,7 +636,7 @@ function MobileCompareBar({
           type="button"
         >
           Compare
-          <MaterialIcon name="compare_arrows" />
+          <LucideIcon name="compare_arrows" />
         </button>
       </div>
     </div>
@@ -673,7 +667,7 @@ function InsightCard({
 }) {
   return (
     <div className="rounded-lg bg-surface-container-low p-5">
-      <MaterialIcon className={cn("mb-2", tone)} name={icon} />
+      <LucideIcon className={cn("mb-2", tone)} name={icon} />
       <h3 className="mb-1 text-sm font-bold">{label}</h3>
       <p className="text-xs leading-relaxed text-on-surface-variant">{title}</p>
     </div>
@@ -682,10 +676,9 @@ function InsightCard({
 
 function FilledIcon({ name, className }: { name: string; className?: string }) {
   return (
-    <MaterialIcon
+    <LucideIcon
       className={className}
       name={name}
-      style={{ fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}
     />
   );
 }

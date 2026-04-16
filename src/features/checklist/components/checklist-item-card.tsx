@@ -1,6 +1,6 @@
 "use client";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { Card, CardContent } from "@/components/shared/ui/card";
 import type { ChecklistItem } from "@/lib/schemas";
 import { cn } from "@/lib/utils/cn";
@@ -27,7 +27,7 @@ export function ChecklistItemCard({ item }: ChecklistItemCardProps) {
           aria-pressed={completed}
           aria-label={`Mark ${item.title} complete`}
         >
-          <MaterialIcon name={completed ? "check" : "circle"} className="text-[18px]" />
+          <LucideIcon name={completed ? "check" : "circle"} className="text-[18px]" />
         </button>
         <div className="min-w-0 space-y-1">
           <p className={cn("font-bold leading-snug", completed && "text-muted-foreground line-through")}>

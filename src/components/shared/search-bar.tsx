@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils";
 
 type SearchBarProps = {
@@ -45,7 +45,7 @@ export function SearchBar({
         {label}
       </label>
       <div className="flex min-h-12 items-center gap-2 rounded-md border border-border bg-card px-3 shadow-soft">
-        <MaterialIcon className="text-[1.2rem] text-muted-foreground" name="search" />
+        <LucideIcon className="text-[1.2rem] text-muted-foreground" name="search" />
         <input
           className="min-w-0 flex-1 bg-transparent text-base font-medium outline-none placeholder:text-muted-foreground"
           id={id}

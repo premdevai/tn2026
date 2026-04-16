@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { typography } from "@/components/shared/design-styles";
 import { cn } from "@/lib/utils/cn";
 
 type PageHeaderProps = {
@@ -9,6 +10,7 @@ type PageHeaderProps = {
   actions?: ReactNode;
   breadcrumbs?: ReactNode;
   className?: string;
+  size?: "standard" | "compact" | "hero";
 };
 
 export function PageHeader({
@@ -17,23 +19,22 @@ export function PageHeader({
   description,
   actions,
   breadcrumbs,
-  className
+  className,
+  size = "standard"
 }: PageHeaderProps) {
+  const titleClass = size === "hero" ? typography.pageTitleHero : size === "compact" ? typography.pageTitleCompact : typography.pageTitle;
+
   return (
-    <header className={cn("space-y-4", className)}>
+    <header className={cn("space-y-4", size === "hero" && "py-4 md:py-8", className)}>
       {breadcrumbs}
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div className="max-w-3xl space-y-2">
           {eyebrow ? (
-            <p className="text-xs font-bold uppercase tracking-widest text-secondary">{eyebrow}</p>
+            <p className={typography.eyebrow}>{eyebrow}</p>
           ) : null}
-          <h1 className="font-headline text-3xl font-bold leading-tight text-primary md:text-5xl">
-            {title}
-          </h1>
+          <h1 className={titleClass}>{title}</h1>
           {description ? (
-            <p className="text-sm leading-6 text-on-surface-variant md:text-lg md:leading-7">
-              {description}
-            </p>
+            <p className={typography.pageDescription}>{description}</p>
           ) : null}
         </div>
         {actions ? <div className="flex flex-wrap gap-3">{actions}</div> : null}

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils/cn";
 
 type StatusBadgeTone = "neutral" | "good" | "warning" | "danger";
@@ -28,7 +28,7 @@ export function StatusBadge({ children, icon, tone = "neutral", className }: Sta
         className
       )}
     >
-      {icon ? <MaterialIcon className="text-sm" name={icon} /> : null}
+      {icon ? <LucideIcon className="text-sm" name={icon} /> : null}
       {children}
     </span>
   );

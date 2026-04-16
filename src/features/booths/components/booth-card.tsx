@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { MetricChip } from "@/components/shared/metric-chip";
 import { StatusPill } from "@/components/shared/status-pill";
 import { Card, CardContent } from "@/components/shared/ui/card";
@@ -42,7 +42,7 @@ export function BoothCard({ booth }: BoothCardProps) {
           </div>
           <div className="flex items-center justify-between gap-2 text-sm font-semibold text-primary">
             <span>View booth details</span>
-            <MaterialIcon name="chevron_right" />
+            <LucideIcon name="chevron_right" />
           </div>
         </CardContent>
       </Card>

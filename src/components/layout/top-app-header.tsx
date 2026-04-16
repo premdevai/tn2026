@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { APP_NAME } from "@/lib/constants/app";
 import { desktopNavigationItems, isRouteActive } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -32,7 +32,7 @@ export function TopAppHeader() {
           <div className="flex items-center px-6 py-4 w-full">
             <div className="flex items-center gap-4">
               <Link href={mobileBackHref} aria-label="Go back" className="transition-transform active:scale-95">
-                <MaterialIcon name="arrow_back" className="text-2xl text-primary" />
+                <LucideIcon name="arrow_back" className="text-2xl text-primary" />
               </Link>
               <div className="flex flex-col leading-tight">
                 <h1 className="font-headline font-bold text-primary text-lg tracking-tight">
@@ -52,7 +52,7 @@ export function TopAppHeader() {
         <header className="md:hidden bg-surface/90 backdrop-blur-lg sticky top-0 z-50">
           <div className="flex items-center px-6 py-4 w-full border-b border-border/50">
             <div className="flex items-center gap-3">
-              <MaterialIcon name="public" className="text-2xl text-primary" />
+              <LucideIcon name="public" className="text-2xl text-primary" />
               <h1 className="font-headline font-bold text-primary tracking-tight text-xl">
                 {APP_NAME}
               </h1>

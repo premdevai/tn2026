@@ -1,4 +1,4 @@
-import type { Candidate } from "@/lib/schemas";
+import type { Candidate, CandidateFilters } from "@/lib/schemas";
 
 export type CandidateListParams = {
   locality?: string;
@@ -7,4 +7,5 @@ export type CandidateListParams = {
 
 export interface CandidateRepository {
   list(params?: CandidateListParams): Promise<Candidate[]>;
+  listFilters(): Promise<CandidateFilters>;
 }

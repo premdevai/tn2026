@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { Breadcrumbs, LucideIcon, PageHeader } from "@/components/shared";
+import { Button } from "@/components/shared/ui/button";
 import type { District } from "@/lib/schemas";
 import { cn } from "@/lib/utils/cn";
 
@@ -22,21 +23,15 @@ export function DistrictsPage({ districts }: DistrictsPageProps) {
 function MobileDistrictsPage({ districts }: DistrictsPageProps) {
   return (
     <div className="md:hidden min-h-[max(884px,100dvh)] pb-8">
-      <main className="max-w-4xl mx-auto px-6 pt-8 pb-12">
-        <section className="mb-10">
-          <div className="flex flex-col gap-2">
-            <span className="text-secondary font-semibold tracking-wider text-xs uppercase">
-              Electoral Jurisdiction
-            </span>
-            <h2 className="text-4xl font-extrabold text-primary tracking-tight leading-tight font-headline">
-              Districts of <br />
-              Tamil Nadu
-            </h2>
-            <p className="text-on-surface-variant max-w-lg mt-2 text-lg">
-              Explore administrative regions and their legislative representation for the upcoming civic term.
-            </p>
-          </div>
-        </section>
+      <main className="mx-auto max-w-7xl px-6 py-8 md:px-8 md:py-12">
+        <PageHeader
+          breadcrumbs={<Breadcrumbs items={[{ href: "/", label: "Tamil Nadu" }, { label: "Districts" }]} />}
+          className="mb-10"
+          eyebrow="Electoral jurisdiction"
+          title="Districts of Tamil Nadu"
+          description="Explore administrative regions and their legislative representation for the upcoming civic term."
+          size="compact"
+        />
 
         <div className="grid grid-cols-1 gap-6">
           {districts.map((district, index) => (
@@ -44,7 +39,7 @@ function MobileDistrictsPage({ districts }: DistrictsPageProps) {
           ))}
         </div>
 
-        <section className="mt-12 bg-primary p-8 rounded-3xl relative overflow-hidden flex flex-col items-center gap-8">
+        <section className="mt-12 bg-primary p-8 rounded-lg relative overflow-hidden flex flex-col items-center gap-8">
           <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/20 rounded-full blur-3xl -mr-20 -mt-20" />
           <div className="flex-1 z-10 text-center">
             <h3 className="text-surface-container-lowest text-2xl font-bold mb-2 tracking-tight font-headline">
@@ -54,9 +49,9 @@ function MobileDistrictsPage({ districts }: DistrictsPageProps) {
               Detailed demographics and historical voting patterns for all 38 districts are available in our annual report.
             </p>
           </div>
-          <button className="z-10 bg-secondary text-white px-8 py-4 rounded-xl font-semibold tracking-wide transition-all active:scale-95 shadow-lg shadow-secondary/20" type="button">
+          <Button className="z-10 shadow-lg shadow-secondary/20" type="button" variant="secondary" size="xl">
             View State Report
-          </button>
+          </Button>
         </section>
       </main>
     </div>
@@ -67,7 +62,7 @@ function MobileDistrictCard({ district, priority }: { district: District; priori
   return (
     <Link
       href={`/districts/${district.slug}`}
-      className="relative group block overflow-hidden rounded-3xl shadow-xl transition-all duration-300 hover:scale-[1.02]"
+      className="relative group block overflow-hidden rounded-lg shadow-xl transition-all duration-300 hover:scale-[1.02]"
     >
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
       <Image
@@ -80,8 +75,8 @@ function MobileDistrictCard({ district, priority }: { district: District; priori
       />
       <div className="relative z-20 p-6 flex flex-col h-full min-h-[320px] justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-white/20 backdrop-blur-md p-3 rounded-2xl text-white">
-            <MaterialIcon name={district.icon} className="text-3xl" />
+          <div className="bg-white/20 backdrop-blur-md p-3 rounded-lg text-white">
+            <LucideIcon name={district.icon} className="text-3xl" />
           </div>
           <span className="bg-white/10 backdrop-blur-md text-white/90 px-3 py-1 rounded-full text-xs font-semibold border border-white/20">
             Region: {district.region}
@@ -93,14 +88,14 @@ function MobileDistrictCard({ district, priority }: { district: District; priori
           <div className="flex items-center gap-6 py-4 border-t border-white/20">
             <div className="flex flex-col">
               <span className="text-2xl font-bold text-white">{district.constituencies}</span>
-              <span className="text-[10px] text-white/70 uppercase font-bold tracking-wider">
+              <span className="text-xs text-white/70 uppercase font-bold tracking-wider">
                 Constituencies
               </span>
             </div>
             <div className="h-10 w-px bg-white/20" />
             <div className="flex flex-col">
               <span className="text-2xl font-bold text-white">{district.mobileVoters}</span>
-              <span className="text-[10px] text-white/70 uppercase font-bold tracking-wider">
+              <span className="text-xs text-white/70 uppercase font-bold tracking-wider">
                 Registered Voters
               </span>
             </div>
@@ -114,39 +109,27 @@ function MobileDistrictCard({ district, priority }: { district: District; priori
 function DesktopDistrictsPage({ districts }: DistrictsPageProps) {
   return (
     <div className="hidden md:block">
-      <main className="pt-8 pb-20 px-8 max-w-7xl mx-auto">
-        <header className="mb-12">
-          <nav className="flex items-center gap-2 mb-4 text-sm font-medium text-on-surface-variant">
-            <Link className="hover:text-primary transition-colors" href="/">
-              Tamil Nadu
-            </Link>
-            <MaterialIcon name="chevron_right" className="text-xs" />
-            <span className="text-secondary">Districts</span>
-          </nav>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
-                State Explorer
-              </h1>
-              <p className="text-lg text-on-surface-variant leading-relaxed">
-                A comprehensive overview of Tamil Nadu&apos;s administrative landscape. Explore district-level demographics,
-                voter registration data, and constituency distributions.
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-high rounded-full font-semibold text-sm hover:bg-surface-container-highest transition-all" type="button">
-                <MaterialIcon name="filter_list" className="text-sm" />
+      <main className="mx-auto max-w-7xl px-6 py-8 md:px-8 md:py-12">
+        <PageHeader
+          className="mb-12"
+          breadcrumbs={<Breadcrumbs items={[{ href: "/", label: "Tamil Nadu" }, { label: "Districts" }]} />}
+          title="State Explorer"
+          description="A comprehensive overview of Tamil Nadu's administrative landscape. Explore district-level demographics, voter registration data, and constituency distributions."
+          actions={
+            <>
+              <Button className="gap-2 rounded-full" type="button" variant="subtle">
+                <LucideIcon name="filter_list" className="text-sm" />
                 Sort by Population
-              </button>
-              <button className="flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-95" type="button">
-                <MaterialIcon name="map" className="text-sm" />
+              </Button>
+              <Button className="gap-2 rounded-full" type="button">
+                <LucideIcon name="map" className="text-sm" />
                 View Map
-              </button>
-            </div>
-          </div>
-        </header>
+              </Button>
+            </>
+          }
+        />
 
-        <section className="mb-16 p-8 bg-surface-container-low rounded-[1.5rem] flex flex-wrap gap-12 items-center">
+        <section className="mb-16 p-8 bg-surface-container-low rounded-lg flex flex-wrap gap-12 items-center">
           <StatBlock label="Total Districts" value="38" />
           <div className="w-px h-12 bg-outline-variant/30 hidden md:block" />
           <StatBlock label="Registered Voters" value="6.23 Cr" />
@@ -154,7 +137,7 @@ function DesktopDistrictsPage({ districts }: DistrictsPageProps) {
           <StatBlock label="Total Constituencies" value="234" />
           <div className="ml-auto">
             <div className="flex items-center gap-2 px-4 py-2 bg-secondary-container/30 text-secondary rounded-lg">
-              <MaterialIcon name="verified" className="text-sm" />
+              <LucideIcon name="verified" className="text-sm" />
               <span className="text-sm font-semibold">Data Verified by ECI</span>
             </div>
           </div>
@@ -184,7 +167,7 @@ function DesktopDistrictsPage({ districts }: DistrictsPageProps) {
               <InsightCard icon="group" value="51%" label="Female Voter Ratio" />
             </div>
           </div>
-          <div className="lg:w-1/2 w-full aspect-video lg:aspect-square bg-surface-container-high rounded-[1.5rem] overflow-hidden relative">
+          <div className="lg:w-1/2 w-full aspect-video lg:aspect-square bg-surface-container-high rounded-lg overflow-hidden relative">
             <Image
               alt="Voting line in a rural Tamil Nadu school with villagers under tree shade"
               className="absolute inset-0 w-full h-full object-cover"
@@ -217,7 +200,7 @@ function DesktopDistrictCard({ district, priority }: { district: District; prior
       href={`/districts/${district.slug}`}
       id={district.slug}
       className={cn(
-        "group relative overflow-hidden rounded-[1.5rem] h-[400px] shadow-[0_24px_48px_-12px_rgba(25,28,29,0.06)] bg-primary",
+        "group relative overflow-hidden rounded-lg h-[400px] shadow-[0_24px_48px_-12px_rgba(25,28,29,0.06)] bg-primary",
         district.featured ? "md:col-span-2" : ""
       )}
     >
@@ -245,7 +228,7 @@ function DesktopDistrictCard({ district, priority }: { district: District; prior
             </div>
           </div>
           <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white p-4 rounded-full group-hover:bg-white group-hover:text-primary transition-all">
-            <MaterialIcon name="arrow_forward" className="text-2xl" />
+            <LucideIcon name="arrow_forward" className="text-2xl" />
           </span>
         </div>
       ) : (
@@ -272,8 +255,8 @@ function DesktopMetric({ label, value, compact = false }: { label: string; value
 
 function InsightCard({ icon, value, label }: { icon: string; value: string; label: string }) {
   return (
-    <div className="p-6 bg-surface-container rounded-[1.5rem]">
-      <MaterialIcon name={icon} className="text-2xl text-secondary mb-3" />
+    <div className="p-6 bg-surface-container rounded-lg">
+      <LucideIcon name={icon} className="text-2xl text-secondary mb-3" />
       <h4 className="font-bold text-primary mb-1">{value}</h4>
       <p className="text-xs text-on-surface-variant">{label}</p>
     </div>

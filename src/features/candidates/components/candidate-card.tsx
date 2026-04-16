@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { MetricChip } from "@/components/shared/metric-chip";
 import { Card, CardContent } from "@/components/shared/ui/card";
 import type { Candidate } from "@/lib/schemas";
@@ -39,7 +39,7 @@ export function CandidateCard({ candidate }: CandidateCardProps) {
                 key={priority}
                 className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-semibold"
               >
-                <MaterialIcon name="check_circle" className="text-[14px] text-primary" />
+                <LucideIcon name="check_circle" className="text-[14px] text-primary" />
                 {priority}
               </span>
             ))}

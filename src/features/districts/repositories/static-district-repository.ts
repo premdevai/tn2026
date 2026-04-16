@@ -1,4 +1,5 @@
 import { districts } from "@/features/districts/data/district-data";
+import { matchesCandidateSlug, toCandidateSlug } from "@/features/districts/lib/candidate-slug";
 import { districtSchema } from "@/lib/schemas";
 import type { DistrictRepository } from "./district-repository";
 
@@ -21,6 +22,13 @@ export function createStaticDistrictRepository(): DistrictRepository {
 
       return district && constituency ? { district, constituency } : null;
     },
+    async findCandidate(districtSlug, constituencySlug, candidateSlug) {
+      const district = districtRecords.find((item) => item.slug === districtSlug);
+      const constituency = district?.constituenciesList.find((item) => item.slug === constituencySlug);
+      const candidate = constituency?.candidates.find((item) => matchesCandidateSlug(item, candidateSlug));
+
+      return district && constituency && candidate ? { district, constituency, candidate } : null;
+    },
     async listSlugs() {
       return districtRecords.map((district) => district.slug);
     },
@@ -30,6 +38,17 @@ export function createStaticDistrictRepository(): DistrictRepository {
           slug: district.slug,
           constituencySlug: constituency.slug
         }))
+      );
+    },
+    async listCandidateSlugs() {
+      return districtRecords.flatMap((district) =>
+        district.constituenciesList.flatMap((constituency) =>
+          constituency.candidates.map((candidate) => ({
+            slug: district.slug,
+            constituencySlug: constituency.slug,
+            candidateSlug: toCandidateSlug(candidate)
+          }))
+        )
       );
     }
   };

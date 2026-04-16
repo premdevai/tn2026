@@ -1,6 +1,6 @@
 import { StatusPill } from "@/components/shared/status-pill";
 import { Card, CardContent } from "@/components/shared/ui/card";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import type { Recommendation } from "@/lib/schemas";
 
 const priorityStatus = {
@@ -21,7 +21,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
       <CardContent className="space-y-3 p-4">
         <div className="flex items-start gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <MaterialIcon name={recommendation.icon} />
+            <LucideIcon name={recommendation.icon} />
           </span>
           <div className="min-w-0 flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-2">

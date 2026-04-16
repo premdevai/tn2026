@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils/cn";
 
 type DisclaimerCardProps = {
@@ -25,7 +25,7 @@ export function DisclaimerCard({
       )}
     >
       <div className="flex items-start gap-3">
-        <MaterialIcon
+        <LucideIcon
           className={cn("mt-0.5 text-[1.25rem]", tone === "info" ? "text-civic-teal" : "text-civic-navy")}
           name={icon}
         />

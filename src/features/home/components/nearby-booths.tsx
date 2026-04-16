@@ -77,13 +77,13 @@ export function NearbyBooths() {
           }
 
           return (
-            <div key={booth.id} className="flex-none w-72 md:w-auto bg-surface-container-lowest rounded-xl p-5 md:p-6 shadow-sm md:transition-all md:hover:-translate-y-1">
+            <div key={booth.id} className="flex-none w-72 md:w-auto bg-surface-container-lowest rounded-lg p-5 md:p-6 shadow-sm md:transition-all md:hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center", iconBg)}>
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div className="text-right">
-                  <span className={cn("block text-[10px] md:text-xs font-bold uppercase tracking-widest mb-1", 
+                  <span className={cn("block text-xs md:text-xs font-bold uppercase tracking-widest mb-1", 
                       booth.status === "Clear" ? "text-secondary" : 
                       booth.status === "Steady" ? "text-on-tertiary-fixed-variant" : "text-on-error-container"
                   )}>Status</span>
@@ -109,7 +109,7 @@ export function NearbyBooths() {
                   </div>
                 </div>
                 
-                <div className="flex items-center text-[10px] md:text-xs text-outline">
+                <div className="flex items-center text-xs md:text-xs text-outline">
                   <Clock className="w-3.5 h-3.5 mr-1" />
                   Updated {booth.updatedAt}
                 </div>

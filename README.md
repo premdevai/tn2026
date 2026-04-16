@@ -10,7 +10,7 @@ Vote Smart TN is a mobile-first, static-first Next.js frontend for a Tamil Nadu 
 - Zod schemas for every core entity
 - Zustand for small client-only state
 - Static-first repository and service abstractions over typed demo datasets
-- Plus Jakarta Sans for editorial UI, Inter for data/caption surfaces, and Material Symbols Outlined icons
+- Plus Jakarta Sans for editorial UI, Inter for data/caption surfaces, and lucide icons
 
 ## Creative Direction
 
@@ -72,6 +72,24 @@ Zustand is intentionally limited to client-only interaction state:
 - quick report draft selection
 - selected station persistence
 
+## Shared UI Contract
+
+Route pages should stay thin: metadata/static params, service calls, `notFound`, and one feature entry component. Route-level headings, breadcrumb/back navigation, page rhythm, and repeated surfaces are owned by shared primitives.
+
+| Need | Use | Rule |
+| --- | --- | --- |
+| Page wrapper | `PageShell` | Standard max width, route padding, and vertical rhythm. |
+| Route title | `PageHeader` | Page titles default to `text-3xl md:text-5xl`; compact and hero sizes are explicit. |
+| Breadcrumb/back nav | `Breadcrumbs` | Use `variant="trail"` for full trails and `variant="back"` for mobile/back-only flows. |
+| Section heading | `PageSection` | Section titles use the shared `text-xl md:text-2xl` scale. |
+| Card surface | `Surface` / `ContentCard` | Default radius is `rounded-lg` / 8px. |
+| Actions | `Button` | Prefer `primary`, `secondary`, `outline`, `ghost`, `link`, `chip`, or `subtle` over raw button classes. |
+| Status | `StatusBadge` / `StatusPill` | Keep status colors semantic, not page-local color recipes. |
+| Metrics | `MetricGrid` / `MetricChip` | Use shared label and value typography. |
+| Images | `ResponsiveImage` / `next/image` | Avoid raw `img`; keep image radius at `rounded-lg` unless it is an avatar or pill. |
+
+Design guardrails are enforced with `npm run lint:design`. The audit blocks tiny arbitrary font sizes, oversized radius classes, raw slate colors, raw hex Tailwind classes, and hand-written route breadcrumb `<nav>` elements outside shared/layout navigation.
+
 ## Future Cloudflare Backend Path
 
 When a Workers + D1 + KV backend is ready:
@@ -90,6 +108,7 @@ No UI component should need to know whether data came from static placeholders, 
 npm install
 npm run dev
 npm run typecheck
+npm run lint:design
 npm run build
 ```
 

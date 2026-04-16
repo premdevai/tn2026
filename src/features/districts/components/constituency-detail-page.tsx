@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { Breadcrumbs, LucideIcon, PageHeader } from "@/components/shared";
+import { Button } from "@/components/shared/ui/button";
+import { toCandidateSlug } from "@/features/districts/lib/candidate-slug";
 import type { BoothStatus, CandidateProfile, Constituency, District } from "@/lib/schemas";
 import { cn } from "@/lib/utils/cn";
 
@@ -21,24 +23,23 @@ export function ConstituencyDetailPage({ district, constituency }: ConstituencyD
 function MobileConstituencyDetail({ district, constituency }: ConstituencyDetailPageProps) {
   return (
     <div className="md:hidden min-h-[max(884px,100dvh)]">
-      <main className="pb-8 px-5 space-y-8">
-        <section className="mt-4">
-          <nav className="flex items-center gap-2 text-outline mb-2 overflow-x-auto no-scrollbar whitespace-nowrap text-sm">
-            <span>Tamil Nadu</span>
-            <MaterialIcon name="chevron_right" className="text-[14px]" />
-            <span>{district.name}</span>
-            <MaterialIcon name="chevron_right" className="text-[14px]" />
-            <span className="text-secondary font-medium">{constituency.name}</span>
-          </nav>
-          <h2 className="font-headline text-2xl font-bold tracking-tight text-primary">
-            {constituency.name} Constituency Hub
-          </h2>
-          <p className="text-on-surface-variant text-sm mt-1">
-            Official voter information for Assembly Constituency {constituency.assemblyNumber}
-          </p>
-        </section>
+      <main className="mx-auto max-w-7xl space-y-8 px-6 py-8 md:px-8 md:py-12">
+        <PageHeader
+          breadcrumbs={
+            <Breadcrumbs
+              items={[
+                { href: "/", label: "Tamil Nadu" },
+                { href: `/districts/${district.slug}`, label: district.name },
+                { label: constituency.name }
+              ]}
+            />
+          }
+          title={`${constituency.name} Constituency Hub`}
+          description={`Official voter information for Assembly Constituency ${constituency.assemblyNumber}`}
+          size="compact"
+        />
 
-        <section className="bg-surface-container-low rounded-xl overflow-hidden relative group">
+        <section className="bg-surface-container-low rounded-lg overflow-hidden relative group">
           <div className="h-44 w-full relative">
             <Image
               alt={`${constituency.name} polling station map`}
@@ -51,15 +52,15 @@ function MobileConstituencyDetail({ district, constituency }: ConstituencyDetail
             <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
               <div className="text-white">
-                <p className="text-[10px] uppercase tracking-widest font-bold opacity-80">
+                <p className="text-xs uppercase tracking-widest font-bold opacity-80">
                   Your Assigned Station
                 </p>
                 <p className="font-semibold text-base">{constituency.assignedStation}</p>
               </div>
-              <button className="bg-secondary text-on-secondary px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg active:scale-95 transition-transform" type="button">
+              <Button className="gap-2 rounded-full shadow-lg" type="button" variant="secondary">
                 Go Now
-                <MaterialIcon name="directions" className="text-sm" />
-              </button>
+                <LucideIcon name="directions" className="text-sm" />
+              </Button>
             </div>
           </div>
         </section>
@@ -83,12 +84,12 @@ function MobileConstituencyDetail({ district, constituency }: ConstituencyDetail
           <h3 className="font-headline text-lg font-semibold text-primary mb-4">Candidate Directory</h3>
           <div className="space-y-4">
             {constituency.candidates.map((candidate) => (
-              <MobileCandidateCard candidate={candidate} key={candidate.name} />
+              <MobileCandidateCard candidate={candidate} key={candidate.name} districtSlug={district.slug} constituencySlug={constituency.slug} />
             ))}
           </div>
         </section>
 
-        <section className="bg-secondary-container/20 p-6 rounded-xl border border-secondary-container/30">
+        <section className="bg-secondary-container/20 p-6 rounded-lg border border-secondary-container/30">
           <h3 className="font-headline text-lg font-semibold text-on-secondary-container mb-4">
             Voter Checklist
           </h3>
@@ -108,7 +109,7 @@ function MobileBoothCard({ booth }: { booth: BoothStatus }) {
   const isMedium = booth.tone === "medium";
 
   return (
-    <div className="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+    <div className="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
       <div className="flex items-center gap-4">
         <div
           className={cn(
@@ -120,7 +121,7 @@ function MobileBoothCard({ booth }: { booth: BoothStatus }) {
                 : "bg-error-container text-error"
           )}
         >
-          <MaterialIcon name={booth.icon} />
+          <LucideIcon name={booth.icon} />
         </div>
         <div>
           <p className="font-bold text-sm">{booth.name}</p>
@@ -143,15 +144,17 @@ function MobileBoothCard({ booth }: { booth: BoothStatus }) {
             isLow ? "bg-secondary" : isMedium ? "bg-tertiary-fixed-dim" : "bg-error"
           )}
         />
-        <span className="text-[11px] font-bold">{booth.waitLabel}</span>
+        <span className="text-xs font-bold">{booth.waitLabel}</span>
       </div>
     </div>
   );
 }
 
-function MobileCandidateCard({ candidate }: { candidate: CandidateProfile }) {
+function MobileCandidateCard({ candidate, districtSlug, constituencySlug }: { candidate: CandidateProfile; districtSlug: string; constituencySlug: string }) {
+  const candidateSlug = toCandidateSlug(candidate);
   return (
-    <div className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+    <Link href={`/districts/${districtSlug}/constituencies/${constituencySlug}/candidates/${candidateSlug}`} className="block">
+      <div className="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
       <div className="p-4 flex gap-4">
         <div className="relative">
           <div className="w-20 h-24 rounded-lg bg-surface-container overflow-hidden relative">
@@ -164,32 +167,32 @@ function MobileCandidateCard({ candidate }: { candidate: CandidateProfile }) {
             />
           </div>
           <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center border-2 border-surface">
-            <MaterialIcon
+            <LucideIcon
               name="verified"
               className="text-secondary text-sm"
-              style={{ fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}
             />
           </div>
         </div>
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <h4 className="font-bold text-base leading-tight">{candidate.name}</h4>
-            <MaterialIcon name={candidate.symbolIcon} className="text-primary text-xl" />
+            <LucideIcon name={candidate.symbolIcon} className="text-primary text-xl" />
           </div>
           <p className={cn("text-xs font-medium mt-0.5", candidate.accent === "tertiary" ? "text-outline" : "text-secondary")}>
             {candidate.mobileParty ?? candidate.party}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <span className="text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md text-outline font-medium">
+            <span className="text-xs bg-surface-container-high px-2 py-0.5 rounded-md text-outline font-medium">
               {candidate.mobileEducation}
             </span>
-            <span className="text-[10px] bg-surface-container-high px-2 py-0.5 rounded-md text-outline font-medium">
+            <span className="text-xs bg-surface-container-high px-2 py-0.5 rounded-md text-outline font-medium">
               {candidate.mobileAssets}
             </span>
           </div>
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 
@@ -197,7 +200,7 @@ function ChecklistItem({ title, detail }: { title: string; detail: string }) {
   return (
     <label className="flex items-start gap-3 group">
       <div className="mt-1 w-5 h-5 rounded border-2 border-secondary flex items-center justify-center transition-colors group-active:bg-secondary">
-        <MaterialIcon name="check" className="text-[14px] text-white hidden" />
+        <LucideIcon name="check" className="text-sm text-white hidden" />
       </div>
       <div className="flex-1">
         <p className="text-sm font-semibold text-primary">{title}</p>
@@ -210,50 +213,44 @@ function ChecklistItem({ title, detail }: { title: string; detail: string }) {
 function DesktopConstituencyDetail({ district, constituency }: ConstituencyDetailPageProps) {
   return (
     <div className="hidden md:block">
-      <main className="pt-8 pb-20 px-8 max-w-7xl mx-auto">
-        <nav className="flex items-center gap-2 mb-8 text-on-surface-variant font-label text-sm uppercase tracking-wider">
-          <span>Tamil Nadu</span>
-          <MaterialIcon name="chevron_right" className="text-xs" />
-          <Link className="hover:text-primary transition-colors" href={`/districts/${district.slug}`}>
-            {district.name}
-          </Link>
-          <MaterialIcon name="chevron_right" className="text-xs" />
-          <span className="text-primary font-semibold">{constituency.name}</span>
-          <MaterialIcon name="chevron_right" className="text-xs" />
-          <span className="text-primary font-semibold">Candidates & Booths</span>
-        </nav>
-
-        <header className="mb-12">
-          <h1 className="font-headline text-4xl font-bold text-primary mb-2">
-            {constituency.name} Constituency Hub
-          </h1>
-          <p className="text-on-surface-variant text-lg max-w-2xl">
-            Official live data for the Assembly Election. Verified candidate profiles and real-time polling booth metrics.
-          </p>
-        </header>
+      <main className="mx-auto max-w-7xl px-6 py-8 md:px-8 md:py-12">
+        <PageHeader
+          breadcrumbs={
+            <Breadcrumbs
+              items={[
+                { href: "/", label: "Tamil Nadu" },
+                { href: `/districts/${district.slug}`, label: district.name },
+                { label: constituency.name },
+                { label: "Candidates & Booths" }
+              ]}
+            />
+          }
+          className="mb-12"
+          title={`${constituency.name} Constituency Hub`}
+          description="Official live data for the Assembly Election. Verified candidate profiles and real-time polling booth metrics."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <section className="lg:col-span-7">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-headline text-2xl font-semibold text-primary">Candidate Directory</h2>
               <span className="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                <MaterialIcon
+                <LucideIcon
                   name="verified"
                   className="text-sm"
-                  style={{ fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}
                 />
                 ECI VERIFIED
               </span>
             </div>
             <div className="space-y-6">
               {constituency.candidates.map((candidate) => (
-                <DesktopCandidateCard candidate={candidate} key={candidate.name} />
+                <DesktopCandidateCard candidate={candidate} key={candidate.name} districtSlug={district.slug} constituencySlug={constituency.slug} />
               ))}
             </div>
           </section>
 
           <aside className="lg:col-span-5 space-y-8">
-            <div className="bg-primary p-8 rounded-xl text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-primary p-8 rounded-lg text-white shadow-2xl relative overflow-hidden">
               <div className="relative z-10">
                 <h2 className="font-headline text-2xl font-semibold mb-2">Polling Finder</h2>
                 <p className="text-on-primary-container mb-6">
@@ -269,7 +266,7 @@ function DesktopConstituencyDetail({ district, constituency }: ConstituencyDetai
                     src={constituency.mapDesktop}
                   />
                   <div className="absolute flex flex-col items-center">
-                    <MaterialIcon name="location_on" className="text-4xl mb-2" />
+                    <LucideIcon name="location_on" className="text-4xl mb-2" />
                     <span className="text-xs font-label uppercase tracking-widest">Interactive Map</span>
                   </div>
                 </div>
@@ -283,22 +280,22 @@ function DesktopConstituencyDetail({ district, constituency }: ConstituencyDetai
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary opacity-20 blur-3xl" />
             </div>
 
-            <div className="bg-surface-container-low p-6 rounded-xl border-l-4 border-secondary">
+            <div className="bg-surface-container-low p-6 rounded-lg border-l-4 border-secondary">
               <h4 className="font-bold text-primary mb-2 flex items-center gap-2">
-                <MaterialIcon name="info" className="text-secondary" />
+                <LucideIcon name="info" className="text-secondary" />
                 Voter Checklist
               </h4>
               <ul className="text-sm space-y-2 text-on-surface-variant">
                 <li className="flex gap-2">
-                  <MaterialIcon name="check_circle" className="text-sm mt-1" />
+                  <LucideIcon name="check_circle" className="text-sm mt-1" />
                   Carry original EPIC card or valid Govt ID.
                 </li>
                 <li className="flex gap-2">
-                  <MaterialIcon name="check_circle" className="text-sm mt-1" />
+                  <LucideIcon name="check_circle" className="text-sm mt-1" />
                   Mobile phones are not allowed inside booths.
                 </li>
                 <li className="flex gap-2">
-                  <MaterialIcon name="check_circle" className="text-sm mt-1" />
+                  <LucideIcon name="check_circle" className="text-sm mt-1" />
                   Booths close at 6:00 PM IST.
                 </li>
               </ul>
@@ -310,11 +307,13 @@ function DesktopConstituencyDetail({ district, constituency }: ConstituencyDetai
   );
 }
 
-function DesktopCandidateCard({ candidate }: { candidate: CandidateProfile }) {
+function DesktopCandidateCard({ candidate, districtSlug, constituencySlug }: { candidate: CandidateProfile; districtSlug: string; constituencySlug: string }) {
+  const candidateSlug = toCandidateSlug(candidate);
   return (
-    <div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+    <Link href={`/districts/${districtSlug}/constituencies/${constituencySlug}/candidates/${candidateSlug}`} className="block">
+      <div className="bg-surface-container-lowest p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-        <MaterialIcon name={candidate.symbolIcon} className="text-6xl" />
+        <LucideIcon name={candidate.symbolIcon} className="text-6xl" />
       </div>
       <div className="flex gap-6">
         <div className="w-24 h-24 rounded-lg bg-surface-container-high flex-shrink-0 overflow-hidden relative">
@@ -342,14 +341,7 @@ function DesktopCandidateCard({ candidate }: { candidate: CandidateProfile }) {
                   : "bg-primary-container text-on-primary-container"
               )}
             >
-              <MaterialIcon
-                name={candidate.symbolIcon}
-                style={
-                  candidate.accent === "tertiary"
-                    ? { fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }
-                    : undefined
-                }
-              />
+              <LucideIcon name={candidate.symbolIcon} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-4">
@@ -359,6 +351,7 @@ function DesktopCandidateCard({ candidate }: { candidate: CandidateProfile }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 
@@ -392,7 +385,7 @@ function DesktopBoothItem({ booth }: { booth: BoothStatus }) {
                 : "text-error bg-error-container"
           )}
         >
-          <MaterialIcon name={isLow ? "bolt" : isMedium ? "pending" : "warning"} className="text-xs" />
+          <LucideIcon name={isLow ? "bolt" : isMedium ? "pending" : "warning"} className="text-xs" />
           {booth.waitLabel}
         </span>
         {booth.actionLabel ? (
@@ -400,7 +393,7 @@ function DesktopBoothItem({ booth }: { booth: BoothStatus }) {
             {booth.actionLabel}
           </button>
         ) : (
-          <p className="text-[10px] text-on-primary-container">
+          <p className="text-xs text-on-primary-container">
             {isMedium ? "Est: 20m wait" : "Avoid peak hours"}
           </p>
         )}

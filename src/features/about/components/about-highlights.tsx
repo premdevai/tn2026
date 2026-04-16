@@ -1,4 +1,4 @@
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 
 const highlights = [
   {
@@ -30,7 +30,7 @@ export function AboutHighlights() {
         <article key={highlight.title} className="rounded-md border border-border bg-card p-4 shadow-soft">
           <div className="flex gap-3">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-              <MaterialIcon name={highlight.icon} />
+              <LucideIcon name={highlight.icon} />
             </span>
             <div className="space-y-1">
               <h2 className="font-semibold">{highlight.title}</h2>

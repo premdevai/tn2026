@@ -6,7 +6,7 @@ export function NewToVotingGuide() {
   return (
     <section className="py-12 md:py-24 px-6 md:px-8 max-w-7xl mx-auto w-full">
       {/* Desktop Version */}
-      <div className="hidden md:flex bg-primary text-on-primary rounded-[2rem] overflow-hidden flex-col md:flex-row items-center shadow-2xl">
+      <div className="hidden md:flex bg-primary text-on-primary rounded-lg overflow-hidden flex-col md:flex-row items-center shadow-2xl">
         <div className="w-full md:w-1/2 p-12 md:p-20">
           <span className="text-tertiary-fixed font-bold uppercase tracking-widest text-sm mb-4 block">New To Voting?</span>
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight font-headline">First-Time Voter Guide</h2>
@@ -15,13 +15,13 @@ export function NewToVotingGuide() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              className="bg-secondary text-on-secondary px-8 py-4 rounded-xl font-bold flex items-center transition-transform active:scale-95"
+              className="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-bold flex items-center transition-transform active:scale-95"
               href="/guide"
             >
               Start the Guide <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
             <button
-              className="bg-surface-container-lowest bg-opacity-10 text-on-primary px-8 py-4 rounded-xl font-bold border border-white border-opacity-10 transition-all hover:bg-opacity-20"
+              className="bg-surface-container-lowest bg-opacity-10 text-on-primary px-8 py-4 rounded-lg font-bold border border-white border-opacity-10 transition-all hover:bg-opacity-20"
               type="button"
             >
                Download PDF
@@ -39,21 +39,21 @@ export function NewToVotingGuide() {
       </div>
 
       {/* Mobile Version */}
-      <div className="md:hidden p-8 bg-[#ffdcbd] rounded-2xl border border-[#f0bd8b]/30 shadow-sm relative overflow-hidden">
+      <div className="md:hidden p-8 bg-tertiary-fixed rounded-lg border border-tertiary-fixed-dim/30 shadow-sm relative overflow-hidden">
         <div className="flex flex-col gap-6 relative z-10">
           <div className="space-y-3">
-            <div className="w-12 h-12 bg-white/50 rounded-xl flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-[#2c1600]" />
+            <div className="w-12 h-12 bg-white/50 rounded-lg flex items-center justify-center">
+              <BookOpen className="w-6 h-6 text-on-tertiary-fixed" />
             </div>
             <div className="space-y-1">
-              <h4 className="font-bold text-[#2c1600] text-xl font-headline">New to voting?</h4>
-              <p className="text-sm text-[#623f18] leading-relaxed">
+              <h4 className="font-bold text-on-tertiary-fixed text-xl font-headline">New to voting?</h4>
+              <p className="text-sm text-on-tertiary-fixed-variant leading-relaxed">
                 Our comprehensive editorial guide covers everything first-time voters in Tamil Nadu need to know for the 2024 elections.
               </p>
             </div>
           </div>
           <Link
-            className="bg-white hover:bg-white/90 text-[#2c1600] px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all w-full sm:w-max"
+            className="bg-white hover:bg-white/90 text-on-tertiary-fixed px-6 py-3 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all w-full sm:w-max"
             href="/guide"
           >
             Read the Full Guide

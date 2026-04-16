@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
+    "lint:design": "node tools/design-audit.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

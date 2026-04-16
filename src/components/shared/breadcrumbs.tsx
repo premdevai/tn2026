@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { cn } from "@/lib/utils/cn";
 
 export type BreadcrumbItem = {
@@ -10,10 +10,32 @@ export type BreadcrumbItem = {
 
 type BreadcrumbsProps = {
   items: BreadcrumbItem[];
+  variant?: "trail" | "back";
+  backHref?: string;
+  backLabel?: string;
   className?: string;
 };
 
-export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+export function Breadcrumbs({
+  backHref,
+  backLabel = "Back",
+  className,
+  items,
+  variant = "trail"
+}: BreadcrumbsProps) {
+  if (variant === "back") {
+    const fallbackHref = backHref ?? items.find((item) => item.href)?.href ?? "/";
+
+    return (
+      <nav aria-label="Breadcrumb" className={cn("flex items-center text-sm font-medium text-on-surface-variant", className)}>
+        <Link className="inline-flex items-center gap-2 transition-colors hover:text-primary" href={fallbackHref}>
+          <LucideIcon className="text-base" name="arrow_back" />
+          {backLabel}
+        </Link>
+      </nav>
+    );
+  }
+
   return (
     <nav
       aria-label="Breadcrumb"
@@ -31,7 +53,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
             ) : (
               <span className={cn(isLast ? "font-semibold text-primary" : undefined)}>{item.label}</span>
             )}
-            {!isLast ? <MaterialIcon className="text-xs" name="chevron_right" /> : null}
+            {!isLast ? <LucideIcon className="text-xs" name="chevron_right" /> : null}
           </span>
         );
       })}

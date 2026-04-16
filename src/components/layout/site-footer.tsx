@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { APP_NAME } from "@/lib/constants/app";
 import { appRoutes } from "@/lib/constants/navigation";
 
@@ -73,13 +73,13 @@ export function SiteFooter() {
         </span>
         <div className="flex gap-6">
           <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Share">
-            <MaterialIcon name="share" className="text-xl" />
+            <LucideIcon name="share" className="text-xl" />
           </a>
           <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="RSS feed">
-            <MaterialIcon name="rss_feed" className="text-xl" />
+            <LucideIcon name="rss_feed" className="text-xl" />
           </a>
           <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Public portal">
-            <MaterialIcon name="public" className="text-xl" />
+            <LucideIcon name="public" className="text-xl" />
           </a>
         </div>
       </div>

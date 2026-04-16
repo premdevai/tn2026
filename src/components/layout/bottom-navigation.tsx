@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MaterialIcon } from "@/components/shared/material-icon";
+import { LucideIcon } from "@/components/shared/lucide-icon";
 import { bottomNavigationItems, isRouteActive } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils/cn";
 
@@ -31,18 +31,10 @@ export function BottomNavigation() {
                 : "text-on-surface-variant hover:text-secondary"
             )}
           >
-            <MaterialIcon
-              name={item.icon}
-              className="text-2xl"
-              style={
-                isActive && item.id === "constituencies"
-                  ? { fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24" }
-                  : undefined
-              }
-            />
+            <LucideIcon name={item.icon} className="text-2xl" />
             <span
               className={cn(
-                "mt-1 max-w-full truncate font-body text-[10px] tracking-wide sm:text-[11px]",
+                "mt-1 max-w-full truncate font-body text-xs tracking-wide sm:text-xs",
                 isActive ? "font-bold" : "font-medium"
               )}
             >
