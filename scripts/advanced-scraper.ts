@@ -32,7 +32,7 @@ async function runAdvancedScraper() {
         const rows = document.querySelectorAll('table#dgPublicReport tr, table.mGrid tr');
         if (!rows || rows.length === 0) return [];
         
-        const extracted: any[] = [];
+        const extracted: Record<string, unknown>[] = [];
         Array.from(rows).forEach((row, i) => {
           if (i === 0) return; // Skip header
           const cols = row.querySelectorAll('td');
@@ -56,8 +56,8 @@ async function runAdvancedScraper() {
         generateMockCandidates();
       }
     }
-  } catch (e: any) {
-    console.log(`Page navigation failed: ${e.message}`);
+  } catch (e: unknown) {
+    console.log(`Page navigation failed: ${(e as Error).message}`);
     generateMockCandidates();
   }
 
@@ -76,7 +76,7 @@ async function runAdvancedScraper() {
         const rows = document.querySelectorAll('table#ContentPlaceHolder1_GridView1 tr, table.gridview tr');
         if (!rows || rows.length === 0) return [];
         
-        const extracted: any[] = [];
+        const extracted: Record<string, unknown>[] = [];
         Array.from(rows).forEach((row, i) => {
           if (i === 0) return;
           const cols = row.querySelectorAll('td');
@@ -100,8 +100,8 @@ async function runAdvancedScraper() {
         generateMockBooths();
       }
     }
-  } catch (e: any) {
-    console.log(`Page navigation failed: ${e.message}`);
+  } catch (e: unknown) {
+    console.log(`Page navigation failed: ${(e as Error).message}`);
     generateMockBooths();
   }
 
@@ -123,7 +123,7 @@ function generateMockBooths() {
   ], 'scraped-booths.json');
 }
 
-function saveData(data: any[], filename: string) {
+function saveData(data: Record<string, unknown>[], filename: string) {
   const outputDir = path.join(__dirname, '../src/features/districts/data');
   const outputPath = path.join(outputDir, filename);
   if (!fs.existsSync(outputDir)) {

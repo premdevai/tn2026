@@ -1,4 +1,4 @@
-import type { BoothStatus, CandidateProfile, Constituency, District } from "@/lib/schemas";
+import type { Constituency, District } from "@/lib/schemas";
 import scrapedCandidates from "./scraped-candidates.json";
 import scrapedBooths from "./scraped-booths.json";
 
@@ -6,9 +6,11 @@ function createConstituency(
   overrides: Partial<Constituency> & Pick<Constituency, "slug" | "name" | "division" | "turnout" | "status" | "assemblyNumber">
 ): Constituency {
   // Try to find matching candidates/booths from the scraped JSON databases
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localCandidates = (scrapedCandidates as any[]).filter(
     (c) => c.acName.toLowerCase() === overrides.name.toLowerCase()
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localBooths = (scrapedBooths as any[]).filter(
     (b) => b.acName.toLowerCase() === overrides.name.toLowerCase()
   );

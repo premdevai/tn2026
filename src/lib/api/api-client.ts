@@ -89,7 +89,7 @@ export function createApiClient({ baseUrl, fetchImpl = fetch }: ApiClientOptions
       });
     }
 
-    return parsed.data;
+    return parsed.data as ApiEnvelope<z.infer<Schema>>;
   }
 
   return {

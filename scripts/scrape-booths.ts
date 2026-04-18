@@ -17,7 +17,7 @@ async function scrapeBooths() {
     });
 
     const $ = cheerio.load(response.data);
-    const booths: any[] = [];
+    const booths: Record<string, unknown>[] = [];
 
     // Assuming standard TN CEO ASPX table structure
     const rows = $('table#ContentPlaceHolder1_GridView1 tr, table.gridview tr');
@@ -46,7 +46,7 @@ async function scrapeBooths() {
     saveData(booths);
 
   } catch (err) {
-    const error = err as any;
+    const error = err as Error & { response?: { status: number } };
     if (error.response && error.response.status === 404) {
       console.log(`Official URL returned 404. The 2026/25 Booth List ASPX is not active yet.`);
       console.log(`Falling back to local simulation of the expected booth payload...`);
@@ -83,7 +83,7 @@ function generateMockData() {
   saveData(dummyBooths);
 }
 
-function saveData(data: any[]) {
+function saveData(data: Record<string, unknown>[]) {
   const outputDir = path.join(__dirname, '../src/features/districts/data');
   const outputPath = path.join(outputDir, 'scraped-booths.json');
   

@@ -18,7 +18,7 @@ async function scrapeCandidates() {
     });
 
     const $ = cheerio.load(response.data);
-    const candidates: any[] = [];
+    const candidates: Record<string, unknown>[] = [];
 
     // TN SEC ASPX tables typically use #dgPublicReport, #GridView1 or .mGrid
     const rows = $('table#dgPublicReport tr, table.mGrid tr');
@@ -49,7 +49,7 @@ async function scrapeCandidates() {
     saveData(candidates);
 
   } catch (err) {
-    const error = err as any;
+    const error = err as Error & { response?: { status: number } };
     if (error.response && error.response.status === 404) {
       console.log(`Official URL returned 404. The 2026 portal is not live yet.`);
       console.log(`Falling back to local simulation of the expected scraped payload...`);
@@ -89,7 +89,7 @@ function generateMockData() {
   saveData(dummyCandidates);
 }
 
-function saveData(data: any[]) {
+function saveData(data: Record<string, unknown>[]) {
   const outputDir = path.join(__dirname, '../src/features/districts/data');
   const outputPath = path.join(outputDir, 'scraped-candidates.json');
   

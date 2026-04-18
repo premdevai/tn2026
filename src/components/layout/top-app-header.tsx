@@ -61,25 +61,25 @@ export function TopAppHeader() {
         </header>
       )}
 
-      <nav className="hidden md:block w-full sticky top-0 z-50 bg-surface/90 backdrop-blur-md shadow-sm">
-        <div className="flex justify-between items-center px-8 h-16 max-w-full mx-auto">
-          <div className="flex items-center gap-8">
+      <nav className="hidden md:block w-full sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200/50">
+        <div className="flex justify-between items-center px-8 h-20 max-w-[1400px] mx-auto">
+          <div className="flex items-center gap-12">
             <Link
               href="/"
-              className="text-xl font-bold tracking-tight text-primary font-headline"
+              className="text-2xl font-bold tracking-tighter text-zinc-950 font-headline"
             >
-              {APP_NAME}
+              {APP_NAME}<span className="text-emerald-500">.</span>
             </Link>
-            <div className="hidden md:flex gap-6 items-center">
+            <div className="hidden md:flex gap-8 items-center">
               {desktopNavigationItems.map((link) => (
                 <Link
                   key={link.href}
                   href={link.id === "constituencies" ? constituencyHref : link.href}
                   className={cn(
-                    "transition-colors font-headline font-semibold",
+                    "transition-all text-sm font-semibold tracking-wide",
                     isRouteActive(link, pathname)
-                      ? "text-secondary border-b-2 border-secondary pb-1"
-                      : "text-on-surface-variant hover:text-primary"
+                      ? "text-zinc-950"
+                      : "text-zinc-500 hover:text-zinc-900"
                   )}
                 >
                   {link.label}
@@ -89,13 +89,12 @@ export function TopAppHeader() {
           </div>
           <div className="relative hidden lg:block">
             <input
-              className="bg-surface-container-high border-none rounded-full px-4 py-2 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all"
-              placeholder="Search districts..."
+              className="bg-zinc-100/50 border-none rounded-lg px-5 py-2.5 text-sm w-72 focus:ring-4 focus:ring-emerald-500/10 focus:bg-white transition-all font-medium placeholder:text-zinc-400 outline-none"
+              placeholder="Search platform..."
               type="text"
             />
           </div>
         </div>
-        <div className="bg-outline-variant/50 h-px w-full" />
       </nav>
     </>
   );

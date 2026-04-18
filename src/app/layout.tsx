@@ -1,22 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 
 import { AppShell } from "@/components/layout/app-shell";
 import { APP_DESCRIPTION, APP_NAME, APP_URL } from "@/lib/constants/app";
 
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-plus-jakarta-sans"
+  variable: "--font-outfit"
 });
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter"
+  variable: "--font-geist-sans"
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist-mono"
 });
 
 export const metadata: Metadata = {
@@ -72,7 +77,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
         />
       </head>
-      <body className={`${plusJakartaSans.variable} ${inter.variable}`}>
+      <body className={`${outfit.variable} ${geistSans.variable} ${geistMono.variable} font-sans`}>
         <AppShell>{children}</AppShell>
       </body>
     </html>

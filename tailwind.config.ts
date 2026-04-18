@@ -7,9 +7,9 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        headline: ["var(--font-plus-jakarta-sans)", "Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        data: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        headline: ["var(--font-outfit)", "ui-sans-serif", "system-ui", "sans-serif"],
+        data: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

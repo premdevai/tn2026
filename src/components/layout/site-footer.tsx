@@ -8,22 +8,22 @@ export function SiteFooter() {
   const quickLinks = appRoutes.filter((route) => route.desktopVisible || route.mobileVisible).slice(0, 5);
 
   return (
-    <footer className="w-full py-12 mt-auto bg-surface-container-low border-t border-outline-variant/50 hidden md:block">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
+    <footer className="w-full py-16 mt-auto bg-white border-t border-zinc-200/60 hidden md:block">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 max-w-[1400px] mx-auto">
         <div className="md:col-span-1">
-          <span className="text-lg font-bold text-primary font-headline block mb-4">
-            {APP_NAME}
+          <span className="text-2xl font-bold tracking-tighter text-zinc-950 font-headline block mb-4">
+            {APP_NAME}<span className="text-emerald-500">.</span>
           </span>
-          <p className="text-on-surface-variant font-body text-sm leading-relaxed">
+          <p className="text-zinc-500 font-body text-sm leading-relaxed max-w-[30ch]">
             Official Election Information Hub providing transparent, non-partisan data for the citizens of Tamil Nadu.
           </p>
         </div>
         <div>
-          <h4 className="font-bold text-primary text-sm mb-4">Quick Links</h4>
-          <ul className="space-y-3">
+          <h4 className="font-semibold text-zinc-950 text-sm mb-6 uppercase tracking-wider">Platform</h4>
+          <ul className="space-y-4">
             {quickLinks.map((route) => (
               <li key={route.id}>
-                <Link className="text-on-surface-variant font-body text-sm hover:text-secondary underline transition-all" href={route.href}>
+                <Link className="text-zinc-500 font-medium text-sm hover:text-zinc-950 transition-colors" href={route.href}>
                   {route.label}
                 </Link>
               </li>
@@ -31,55 +31,55 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h4 className="font-bold text-primary text-sm mb-4">Support</h4>
-          <ul className="space-y-3">
+          <h4 className="font-semibold text-zinc-950 text-sm mb-6 uppercase tracking-wider">Support</h4>
+          <ul className="space-y-4">
             <li>
-              <a className="text-on-surface-variant font-body text-sm hover:text-secondary underline transition-all" href="#">
+              <a className="text-zinc-500 font-medium text-sm hover:text-zinc-950 transition-colors" href="#">
                 Contact Us
               </a>
             </li>
             <li>
-              <a className="text-on-surface-variant font-body text-sm hover:text-secondary underline transition-all" href="#">
+              <a className="text-zinc-500 font-medium text-sm hover:text-zinc-950 transition-colors" href="#">
                 Report Error
               </a>
             </li>
             <li>
-              <a className="text-on-surface-variant font-body text-sm hover:text-secondary underline transition-all" href="#">
+              <a className="text-zinc-500 font-medium text-sm hover:text-zinc-950 transition-colors" href="#">
                 Privacy Policy
               </a>
             </li>
           </ul>
         </div>
         <div>
-          <h4 className="font-bold text-primary text-sm mb-4">Official Updates</h4>
-          <p className="text-on-surface-variant font-body text-sm mb-4">
-            Subscribe to receive civic alerts and updates.
+          <h4 className="font-semibold text-zinc-950 text-sm mb-6 uppercase tracking-wider">Updates</h4>
+          <p className="text-zinc-500 font-medium text-sm mb-6 max-w-[25ch]">
+            Subscribe to receive critical civic alerts and updates.
           </p>
           <div className="flex gap-2">
             <input
-              className="bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-sm w-full"
-              placeholder="Email"
+              className="bg-zinc-100 border-none rounded-lg px-4 py-3 text-sm w-full focus:ring-4 focus:ring-emerald-500/10 placeholder:text-zinc-400 outline-none transition-all font-medium"
+              placeholder="Email address"
               type="email"
             />
-            <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold" type="button">
+            <button className="bg-zinc-950 text-white px-5 py-3 rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-colors" type="button">
               Join
             </button>
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-outline-variant/40 flex flex-col md:flex-row justify-between items-center gap-4">
-        <span className="text-on-surface-variant font-body text-xs">
-          © 2026 {APP_NAME}. Official Election Information Hub.
+      <div className="max-w-[1400px] mx-auto px-8 mt-16 pt-8 border-t border-zinc-200/60 flex flex-col md:flex-row justify-between items-center gap-4">
+        <span className="text-zinc-400 font-medium text-sm">
+          © 2026 {APP_NAME}. All rights reserved.
         </span>
-        <div className="flex gap-6">
-          <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Share">
-            <LucideIcon name="share" className="text-xl" />
+        <div className="flex gap-8">
+          <a className="text-zinc-400 hover:text-zinc-950 transition-colors" href="#" aria-label="Share">
+            <LucideIcon name="share" className="w-5 h-5" />
           </a>
-          <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="RSS feed">
-            <LucideIcon name="rss_feed" className="text-xl" />
+          <a className="text-zinc-400 hover:text-zinc-950 transition-colors" href="#" aria-label="RSS feed">
+            <LucideIcon name="rss_feed" className="w-5 h-5" />
           </a>
-          <a className="text-on-surface-variant hover:text-primary transition-colors" href="#" aria-label="Public portal">
-            <LucideIcon name="public" className="text-xl" />
+          <a className="text-zinc-400 hover:text-zinc-950 transition-colors" href="#" aria-label="Public portal">
+            <LucideIcon name="public" className="w-5 h-5" />
           </a>
         </div>
       </div>
